@@ -1,0 +1,17 @@
+gitlab:
+  build: docker/gitlab
+  volumes:
+  - ./etc/gitlab:/etc/gitlab
+  - ./var/opt/gitlab:/var/opt/gitlab
+  - ./var/log/gitlab:/var/log/gitlab
+  hostname: gitlab.bitlag.net
+  ports:
+  - "192.168.1.200:22:22"
+  - "192.168.1.200:80:80"
+  - "192.168.1.200:443:443"
+
+gitlab-runner:
+  image: gitlab/gitlab-runner:alpine
+  volumes:
+  - ./etc/gitlab-runner:/etc/gitlab-runner
+  - /var/run/docker.sock:/var/run/docker.sock

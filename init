@@ -1,0 +1,28 @@
+#!/bin/sh
+
+DOCKER_COMPOSE_YML=/srv/gitlab/docker-compose.yml
+
+start() {
+  echo "Starting gitlab services..."
+  docker-compose -f "$DOCKER_COMPOSE_YML" up -d
+}
+
+stop() {
+  echo "Stopping gitlab services..."
+  docker-compose -f "$DOCKER_COMPOSE_YML" stop
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  retart)
+    stop
+    start
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart}"
+esac
